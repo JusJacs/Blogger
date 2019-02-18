@@ -1,0 +1,51 @@
+
+> lab1@0.0.0 start /home/bitnami/lab1
+> node ./bin/www
+
+[0mGET / [36m304 [0m10.457 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.588 ms - -[0m
+[0mGET / [36m304 [0m1.115 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.274 ms - -[0m
+[0mGET / [36m304 [0m0.669 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.247 ms - -[0m
+[0mGET /bio [33m404 [0m1.576 ms - 883[0m
+[0mGET /bio [33m404 [0m0.947 ms - 883[0m
+[0mGET /bio [33m404 [0m0.778 ms - 883[0m
+
+> lab1@0.0.0 start /home/bitnami/lab1
+> node ./bin/www
+
+[0mGET / [36m304 [0m10.451 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.557 ms - -[0m
+[0mGET /bio [32m200 [0m2.011 ms - 207[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.445 ms - -[0m
+[0mGET / [36m304 [0m0.691 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.218 ms - -[0m
+[0mGET /bio [36m304 [0m0.692 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.305 ms - -[0m
+[0mGET / [36m304 [0m0.722 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.244 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.331 ms - -[0m
+[0mGET /bio [36m304 [0m0.593 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.220 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.269 ms - -[0m
+[0mGET / [36m304 [0m0.610 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.237 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.287 ms - -[0m
+[0mGET /bio [36m304 [0m0.615 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.233 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.327 ms - -[0m
+[0mGET /bio [36m304 [0m0.643 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.310 ms - -[0m
+
+> lab1@0.0.0 start /home/bitnami/lab2
+> node ./bin/www
+
+[0mGET / [36m304 [0m11.710 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.666 ms - -[0m
+[0mGET /blogadd [36m304 [0m1.519 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.287 ms - -[0m
+[0mGET /bloglist [36m304 [0m1.029 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.204 ms - -[0m
+[0mGET / [36m304 [0m0.950 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.244 ms - -[0m
