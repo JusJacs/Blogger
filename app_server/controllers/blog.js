@@ -14,7 +14,6 @@ module.exports.blogAdd = function (req, res) {
 module.exports.addBlog = function(req, res){
     var requestOptions, path, postdata;
     path = '/api/blog/';
-
     postdata = {
         blogTitle: req.body.blogTitle,
         blogText: req.body.bookText
