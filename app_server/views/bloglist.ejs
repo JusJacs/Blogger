@@ -1,45 +1,28 @@
 <!DOCTYPE html>
 <html>
- <head>
-  <title><%= title %></title>
-  <link rel= 'stylesheet' href='/stylesheets/style.css' />
- </head>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <% include nav %>
+      <%  let blog = {}; %>
 
- <body>
-
-  <% include nav %> 
-  <h1><%= title %> </h1>
-  <table>
-   <tr>
-    <th><%= blog[0].blogTitle %></th>
-   <tr>
-   <tr><td id="blogtext"><%= blog[0].blogText %></td></tr>
-   <tr><td id="blogdate"><%= blog[0].createdOnDate %></td></tr>
-   <a href="/blogedit">Edit</a><br>
-   <a href="/blogdelete">Delete</a>
-  </table>
-  
-  <table>
-   <tr>
-   <th><%= blog[1].blogTitle %></th>
-   </tr>
-   <tr><td id="blogtext"><%= blog[1].blogText %></td></tr>
-   <tr><td id="blogdate"><%= blog[1].createdOnDate %></td></tr>
-   <a href="/blogedit">Edit</a><br>
-   <a href="/blogdelete">Delete</a>
-  </table>
-
-  <table>
-   <tr>
-     <th><%= blog[2].blogTitle %></th>
-   </tr>
-   <tr><td id="blogtext"><%= blog[2].blogText %></td></tr>
-   <tr><td id="blogdate"><%= blog[2].createdOnDate %></td></tr>
-   <a href="/blogedit">Edit</a><br>
-   <a href="/blogdelete">Delete</a>
-  </table>
-
- </body>
-
-
+         <% if (blogs.length == 0) { %>
+         
+         <h4> No blogs to display. Add one above.</h4>
+         <%} else {%>
+          <% for(let i = 0; i < blogs.length; i++) { 
+              blog = blogs[i] %>
+              <% include bloglist %>
+          <% } %> 
+        <% } %>
+      <p> Served by host: <%= hostname %></p>
+    </div> <!-- container -->
+  </body>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
 </html>
+
