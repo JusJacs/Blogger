@@ -102,7 +102,7 @@ var renderBlogList = function(req, res, responseBody) {
 /* GET for blog edit page */
 module.exports.blogEdit = function(req, res) {
     var requestOptions, path;
-    path = "/api/blog/" + req.params.id;
+    path = "/api/blog/" + req.params.blogId;
     requestOptions = {
         url : apiOptions.server + path,
         method : "GET",
@@ -140,7 +140,7 @@ var renderBlogEditPage = function(req, res, blogData){
 //blogEdit PUT
 module.exports.blogEditPut = function(req, res){
     var requestOptions, path, postdata;
-    var id = req.params._id;
+    var id = req.params.blogId;
     path = '/api/blog/' + id;
 
     postdata = {
@@ -172,7 +172,7 @@ module.exports.blogEditPut = function(req, res){
 /* blogdelete GET */
 module.exports.blogDelete = function(req, res) {
    var requestOptions, path;
-    path = "/api/blog/" + req.params.id;
+    path = "/api/blog/" + req.params.blogId;
     requestOptions = {
         url : apiOptions.server + path,
         method : "GET",
@@ -209,7 +209,7 @@ var renderBlogDelete = function(req, res, responseBody){
 /* blogDelete method  DELETE  */
 module.exports.blogDeleteDelete = function(req, res){
     var requestOptions, path, postdata;
-    var id = req.params.id;
+    var id = req.params.blogId;
     path = '/api/blog/' + id;
 
     requestOptions = {
@@ -229,6 +229,7 @@ module.exports.blogDeleteDelete = function(req, res){
         }
     );
 };               
+
 
 
 
