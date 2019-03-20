@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<div class="card border-primary" style="width: 50%">
+    <div class="card-header">
+      <div class="row">
+          <div class="col-sm">
+              Blog List
+          </div>
+       </div>
+     </div>
+</div>
+    <div class="card-body">
+        <h5 class ="blogtitle"><%=blogList.blogText%></h5>
+        <p class="blogtext"><%=blogList.blogTitle%></p>
+    </div>
+    <div class="card-footer">
+        <div class = "row">
+            <div class = "col-sm">
+            </div>
+            <div class = "col-sm">
+                <ul class="nav justify-content-end nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/blogedit/<%=blogList._id%>"> <i class="fas fa-edit"></i></a>
+                        </li>
+                    <%}%>
+                    <li cl
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blogdelete/<%=blogList._id%>"> <i class="fas fa-trash-alt"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="blogdelete<%=blogList._id%>">
+                            <button type="submit" class="btn btn-link">Edit </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<p> <!-- card -->
+

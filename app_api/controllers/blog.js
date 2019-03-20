@@ -7,7 +7,7 @@ var sendJSONresponse = function(res, status, content) {
 };
 
 //GET list of all blogs
-module.exports.blogList = function (req, res) {
+module.exports.getBlogList = function (req, res) {
   console.log('Getting blogs list');
   blog
       .find()
@@ -42,11 +42,11 @@ var buildBlogList = function(req, res, results) {
 
 
 // GET a blog by id
-module.exports.blogGetOne = function (req, res) {
+module.exports.getOneBlog = function (req, res) {
   console.log('Getting blog details', req.params);
 
   if (req.params && req.params.blogid) {
-    Loc
+    blog
       .findById(req.params.blogid)
       .exec(function(err, location) {
         if (!blog) {
@@ -73,28 +73,30 @@ module.exports.blogGetOne = function (req, res) {
 
 
 //POST a blog
-///* /api/blogs */
-module.exports.blogAdd = function (req, res) {
+//
+module.exports.postBlog = function (req, res) {
   console.log(req.body);
   blog
     .create({
-      blogTitle: req.body.blogTitle1,
-      blogText: req.body.blogText1,      
+      blogTitle: req.body.blogTitle,
+      blogText: req.body.blogText,
+      createdOnDate: req.body.date
+      },      
       function(err, blog) {
        if (err) {
           console.log(err);
           sendJSONresponse(res, 400, err);
-       } else {
+         } else {
           console.log(blog);
           sendJSONresponse(res, 201, blog);
-       }
-     }
-    }
-   );
+         }
+         
+        
+     });
 };                    
 
 //PUT method to update the blog
-module.exports.blogEdit = function (req, res) {
+module.exports.updateBlog = function (req, res) {
     console.log("Updating a blog entry with id of " + req.params.id);
     console.log(req.body);
     blog
@@ -114,7 +116,7 @@ module.exports.blogEdit = function (req, res) {
 
 
 //DELETE a blog
-module.exports.blogDelete = function (req, res) {
+module.exports.deleteBlog = function (req, res) {
     console.log("Deleting blog entry with id of " + req.params.id);
     console.log(req.body);
     blog
@@ -128,6 +130,4 @@ module.exports.blogDelete = function (req, res) {
                 }
             }
         );
-};             
-  
-
+};            

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb://tasks:tasks@localhost:27017/?authMechanism=SCRAM-SHA-1&authSource=tasks';
-mongoose.connect(dbURI);
+var dbURI = 'mongodb://blogsuser:bloguserpwd@localhost:27017/blogs';
+mongoose.connect(dbURI, { useNewUrlParser: true });
 
 
 // Monitor and report when database is connected                      

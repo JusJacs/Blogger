@@ -4,25 +4,28 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/fontawesome-all.css">
   </head>
   <body>
-    <div class="container">
       <% include nav %>
-      <%  let blog = {}; %>
 
-         <% if (blogs.length == 0) { %>
-         
-         <h4> No blogs to display. Add one above.</h4>
-         <%} else {%>
-          <% for(let i = 0; i < blogs.length; i++) { 
-              blog = blogs[i] %>
-              <% include bloglist %>
-          <% } %> 
-        <% } %>
-      <p> Served by host: <%= hostname %></p>
-    </div> <!-- container -->
+	<% let blogs = {}; %>
+       
+       <% if (blogList.length == 0) { %>
+      
+	 <h4> No tasks to display. Add one above.</h4>
+
+	<% } else {%>
+
+	<h4> We have some tasks!</h4>
+
+	<% } %>
+	
+	  
+	
+
+
   </body>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
 </html>
-

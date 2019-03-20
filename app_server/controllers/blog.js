@@ -1,8 +1,9 @@
 //Request object
 var request = require('request');
 var apiOptions = {
-    server : "http://3.91.115.180"
-};
+	server : 'http://localhost'
+     }
+
 
 
 /* Blog Add */
@@ -11,12 +12,13 @@ module.exports.blogAdd = function (req, res) {
 };
 
 /* Blog Add (Post) */
-module.exports.addBlog = function(req, res){
+module.exports.postBlogAdd = function(req, res){
     var requestOptions, path, postdata;
-    path = '/api/blog/';
+    path = '/api/blog';
     postdata = {
         blogTitle: req.body.blogTitle,
-        blogText: req.body.bookText
+        blogText: req.body.blogText,
+        createdOnDate: Date.now()
     }; 
 
     requestOptions = {
@@ -28,10 +30,11 @@ module.exports.addBlog = function(req, res){
     request(
       requestOptions,
       function(err, response, body) {
+	console.log("made into function of request part");
          if (response.statusCode === 201) {
               res.redirect('/bloglist');
-         } else {
-	      console.log(body);
+         }  else {
+	      console.log(response.statusCode);
               _showError(req, res, response.statusCode);
          } 
       }
@@ -53,7 +56,7 @@ var _showError = function (req, res, status) {
     content = "Something, somewhere, is  wrong.";
   }
   res.status(status);
-  res.render('generic-text', {
+  res.render('bloglist', {
     title : title,
     content : content
   });
@@ -63,7 +66,7 @@ var _showError = function (req, res, status) {
 //New (GET) blogs list
 module.exports.blogList = function(req, res){
     var requestOptions, path;
-    path = '/api/blog';
+    path = "/api/blog";
     requestOptions = { 
         url : apiOptions.server + path,
         method : "GET",
@@ -73,19 +76,24 @@ module.exports.blogList = function(req, res){
     request(
         requestOptions,
         function(err, response, body) {
-            renderBlogList(req, res, body);
-        }
+           if(err) {
+		console.log(err);
+	    } else if (response.statusCode === 200) {
+		console.log("Blogs List: " + body.length);
+	        renderBlogList(req, res, body);
+	    } else {
+		console.log(response.statusCode);
+	    }
+	}
     );
 };
+        
 
 /* Render the book list page */
-var renderBlogList = function(req, res, responseBody){
-    res.render('blogList', {
+var renderBlogList = function(req, res, responseBody) {
+    res.render('bloglist', {
         title: 'Blog List',
-        pageHeader: {
-            title: 'BLog List'
-        },
-        blog: responseBody
+        blogList: responseBody
     });
 };    
 
@@ -158,7 +166,7 @@ module.exports.blogEdit = function(req, res) {
 
 /* Render blog edit page */
 var renderBlogEditPage = function(req, res, responseBody){
-    res.render('blogEdit', {
+    res.render('blogedit', {
         title: 'Blog Info',
         pageHeader: {
                 title: 'Blog Info'
@@ -181,7 +189,7 @@ module.exports.blogEditPost = function(req, res){
     };
 
     requestOptions = {
-        url : apiOptions.server + path,
+        url : apiOptions + path,
         method : "PUT",
         json : postdata
     };
@@ -206,7 +214,7 @@ module.exports.blogDelete = function(req, res) {
    var requestOptions, path;
     path = "/api/blog/" + req.params.id;
     requestOptions = {
-        url : apiOptions.server + path,
+        url : apiOptions + path,
         method : "GET",
         json : {}
     };
@@ -236,7 +244,7 @@ module.exports.blogDeletePost = function(req, res){
     path = '/api/blog/' + id;
 
     requestOptions = {
-	url : apiOptions.server + path,
+	url : apiOptions + path,
         method : "DELETE",
         json : {}
     };
@@ -252,5 +260,21 @@ module.exports.blogDeletePost = function(req, res){
         }
     );
 };               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

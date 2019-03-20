@@ -12245,3 +12245,142 @@ Mongoose connected to mongodb://localhost/blogger
 [0mGET / [32m200 [0m1.110 ms - 1777[0m
 [0mGET / [32m200 [0m2.242 ms - 1777[0m
 [0mGET / [32m200 [0m0.901 ms - 1777[0m
+
+> blogger@0.0.0 start /home/bitnami/lab4
+> node ./bin/www
+
+(node:2605) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+Mongoose disconnected
+Mongoose connection error: MongoError: Authentication failed.
+[0mGET / [36m304 [0m11.857 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.592 ms - -[0m
+[0mGET /favicon.ico [33m404 [0m2.182 ms - 1416[0m
+
+> blogger@0.0.0 start /home/bitnami/lab4
+> node ./bin/www
+
+(node:2648) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+Mongoose disconnected
+Mongoose connection error: MongoError: Authentication failed.
+[0mGET / [36m304 [0m11.334 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.894 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m11.543 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m29.506 ms - 1268[0m
+[0mGET /blogadd [36m304 [0m2.050 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.672 ms - -[0m
+[0mGET /js/jquery.min.js [36m304 [0m0.651 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m0.465 ms - -[0m
+[0mGET / [36m304 [0m1.437 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.368 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m1.489 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m7.484 ms - 1268[0m
+[0mGET / [36m304 [0m1.006 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.350 ms - -[0m
+[0mGET /blogadd [36m304 [0m1.330 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.425 ms - -[0m
+[0mGET /js/jquery.min.js [36m304 [0m1.357 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m0.342 ms - -[0m
+[0mGET / [36m304 [0m0.940 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.351 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m1.107 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m4.730 ms - 1268[0m
+[0mGET /api/bloglist [33m404 [0m0.978 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m4.090 ms - 1268[0m
+[0mGET /api/bloglist [33m404 [0m1.983 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m5.166 ms - 1268[0m
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, audit, bin, bugs, c, cache, ci, cit,
+    clean-install, clean-install-test, completion, config,
+    create, ddp, dedupe, deprecate, dist-tag, docs, doctor,
+    edit, explore, get, help, help-search, hook, i, init,
+    install, install-ci-test, install-test, it, link, list, ln,
+    login, logout, ls, org, outdated, owner, pack, ping, prefix,
+    profile, prune, publish, rb, rebuild, repo, restart, root,
+    run, run-script, s, se, search, set, shrinkwrap, star,
+    stars, start, stop, t, team, test, token, tst, un,
+    uninstall, unpublish, unstar, up, update, v, version, view,
+    whoami
+
+npm <command> -h  quick help on <command>
+npm -l            display full usage info
+npm help <term>   search for help on <term>
+npm help npm      involved overview
+
+Specify configs in the ini-formatted file:
+    /home/bitnami/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@6.7.0 /opt/bitnami/nodejs/lib/node_modules/npm
+
+
+> blogger@0.0.0 start /home/bitnami/lab4
+> node ./bin/www
+
+(node:2769) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+Mongoose disconnected
+Mongoose connection error: MongoError: Authentication failed.
+[0mGET / [36m304 [0m11.851 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.872 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m12.623 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m480.000 ms - 1201[0m
+[0mGET /blogadd [36m304 [0m1.684 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.550 ms - -[0m
+[0mGET /js/jquery.min.js [36m304 [0m0.591 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m0.320 ms - -[0m
+[0mGET / [36m304 [0m1.286 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.368 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m1.354 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m313.549 ms - 1201[0m
+
+> blogger@0.0.0 start /home/bitnami/lab4
+> node ./bin/www
+
+(node:2814) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+Mongoose disconnected
+Mongoose connection error: MongoError: Authentication failed.
+[0mGET / [32m200 [0m10.656 ms - 1777[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.854 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m11.718 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m383.790 ms - 1201[0m
+
+> blogger@0.0.0 start /home/bitnami/lab4
+> node ./bin/www
+
+(node:2869) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+Mongoose disconnected
+Mongoose connection error: MongoError: Authentication failed.
+[0mGET / [36m304 [0m11.524 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.794 ms - -[0m
+[0mGET / [36m304 [0m1.545 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.333 ms - -[0m
+[0mGET /blogadd [36m304 [0m1.413 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.263 ms - -[0m
+[0mGET /js/jquery.min.js [36m304 [0m0.513 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m0.383 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m10.991 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m356.611 ms - 1201[0m
+[0mGET /blogadd [36m304 [0m6.724 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.494 ms - -[0m
+[0mGET /js/jquery.min.js [36m304 [0m0.640 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m0.344 ms - -[0m
+[0mPOST /blog/blogadd/ [33m404 [0m2.196 ms - 1411[0m
+[0mPOST /blog/blogadd/ [33m404 [0m1.310 ms - 1411[0m
+[0mGET /api/bloglist [33m404 [0m1.106 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m383.766 ms - 1201[0m
+[0mGET / [32m200 [0m1.887 ms - 1777[0m
+[0mGET / [36m304 [0m1.472 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.496 ms - -[0m
+[0mGET / [36m304 [0m1.076 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.334 ms - -[0m
+[0mGET /api/bloglist [33m404 [0m1.496 ms - 1404[0m
+[0mGET /bloglist [31m500 [0m6.521 ms - 1407[0m
+[0mGET /blogadd [36m304 [0m1.434 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.408 ms - -[0m
+[0mGET /js/jquery.min.js [36m304 [0m0.529 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m0.357 ms - -[0m
+[0mPOST /blog/blogadd/ [33m404 [0m1.948 ms - 1411[0m
+[0mPOST /blog/blogadd/ [33m404 [0m1.020 ms - 1411[0m

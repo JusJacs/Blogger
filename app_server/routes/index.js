@@ -7,8 +7,8 @@ var blogctrl = require('../controllers/blog');
 /* Page Routes */
 router.get('/', homectrl.home);
 router.get('/bloglist', blogctrl.blogList); //RETURN LIST with api
-router.get('/blogadd', blogctrl.blogAdd);
-router.post('blog/blogadd', blogctrl.addBlog); //ADD a BLOG
+router.get('/blogadd',blogctrl.blogAdd);   //
+router.post('/blogadd', blogctrl.postBlogAdd); //ADD a BLOG
 router.get('/blogedit/:blogid', blogctrl.blogGetOne); // get SINGLE BLOG for edit or delete
 router.put('/blogedit/:blogid', blogctrl.blogEdit); // UPDATE a blog
 router.delete('/blogdelete/:blogid', blogctrl.blogDelete); // DELETE a blog
