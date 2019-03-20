@@ -3,29 +3,35 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/fontawesome-all.css">
+
   </head>
+
   <body>
-      <% include nav %>
+    <% include nav %>
 
-	<% let blogs = {}; %>
-       
-       <% if (blogList.length == 0) { %>
-      
-	 <h4> No tasks to display. Add one above.</h4>
-
-	<% } else {%>
-
-	<h4> We have some tasks!</h4>
-
-	<% } %>
-	
-	  
-	
-
-
+    <h1><%= title %></h1>
+    <div class="container">
+      <% let blog = {}; %>
+      <% blogList.forEach(function(blog) { %>
+	     <div class="card border-dark" style="width: 50%">
+		  <div class="card-header">
+		    <div class="row">
+		      <div class="col-sm">
+			<%= blog.blogTitle %>
+		      </div>
+		    </div>
+		  </div>
+		      <div class="card-body">
+			<p class="card-text"><%= blog.blogText %></p>
+                      </div>
+                   <div class="card-footer">
+                      <p class="card-text"><%= blog.createdOnDate %></p>
+		       <a href="/blogedit" class="btn btn-primary">Edit Blog</a>
+                       <a href="/blogdelete" class="btn btn-danger">Delete Blog</a>
+                   </div>
+                   
+           </div> <% }); %>				    
   </body>
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
+
+
 </html>
