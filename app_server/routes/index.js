@@ -5,13 +5,14 @@ var blogctrl = require('../controllers/blog');
 //var
 
 /* Page Routes */
-router.get('/', homectrl.home);
-router.get('/bloglist', blogctrl.blogList); //RETURN LIST with api
-router.get('/blogadd',blogctrl.blogAdd);   //
-router.post('/blogadd', blogctrl.postBlogAdd); //ADD a BLOG
-router.get('/blogedit/:blogid', blogctrl.blogGetOne); // get SINGLE BLOG for edit or delete
-router.put('/blogedit/:blogid', blogctrl.blogEdit); // UPDATE a blog
-router.delete('/blogdelete/:blogid', blogctrl.blogDelete); // DELETE a blog
+router.get('/', homectrl.home); //home page GET
+router.get('/bloglist', blogctrl.blogList); // bloglist page GET
+router.get('/blogadd',blogctrl.blogAdd);   // add blog page GET
+router.post('/blogadd', blogctrl.postBlogAdd); //add blog page POST
+router.get('/blogedit', blogctrl.blogEdit); // edit blog page GET
+router.put('/blogedit/:blogId', blogctrl.blogEditPut); //  edit blog page PUT
+router.get('/blogdelete', blogctrl.blogDelete); // delete blog page GET
+router.delete('/blogdelete/:blogId', blogctrl.blogDeleteDelete); //delete delete page DELETE
 
 
 module.exports = router;

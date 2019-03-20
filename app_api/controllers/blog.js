@@ -34,7 +34,7 @@ var buildBlogList = function(req, res, results) {
       blogTitle: obj.blogTitle,
       blogText: obj.blogText,
       createdOnDate: obj.createdOnDate,
-      _id: obj._id
+      blogId: obj._id
     });
   });
   return blogs;
@@ -43,17 +43,17 @@ var buildBlogList = function(req, res, results) {
 
 // GET a blog by id
 module.exports.getOneBlog = function (req, res) {
-  console.log('Getting blog details', req.params);
+  console.log('Getting blog details', req.params._id);
 
-  if (req.params && req.params.blogid) {
+  if (req.params && req.params._id) {
     blog
-      .findById(req.params.blogid)
-      .exec(function(err, location) {
+      .findById(req.params._id)
+      .exec(function(err, blog) {
         if (!blog) {
-          sendJSONresponse(res, 404, {
-            "message": "blog not found"
-          });
+          sendJSONresponse(res, 404, 
+           { "message": "blog not found" });
           return;
+
         } else if (err) {
           console.log(err);
           sendJSONresponse(res, 404, err);
@@ -64,9 +64,8 @@ module.exports.getOneBlog = function (req, res) {
       });
   } else {
     console.log('No blogid in request');
-    sendJSONresponse(res, 404, {
-      "message": "No blogid in request"
-    });
+    sendJSONresponse(res, 404,
+     { "message": "No blogid in request" });
   }
 };
 
@@ -97,11 +96,11 @@ module.exports.postBlog = function (req, res) {
 
 //PUT method to update the blog
 module.exports.updateBlog = function (req, res) {
-    console.log("Updating a blog entry with id of " + req.params.id);
+    console.log("Updating a blog entry with id of " + req.params._id);
     console.log(req.body);
     blog
   	  .findOneAndUpdate(
-	     { _id: req.params.id },
+	     { _id: req.params._id },
  	     { $set: {"blogTitle": req.body.blogTitle}},
 	     { $set: {"bookText": req.body.blogText}},
 	     function(err, response) {
@@ -117,10 +116,10 @@ module.exports.updateBlog = function (req, res) {
 
 //DELETE a blog
 module.exports.deleteBlog = function (req, res) {
-    console.log("Deleting blog entry with id of " + req.params.id);
+    console.log("Deleting blog entry with id of " + req.params._id);
     console.log(req.body);
     blog
-        .findByIdAndRemove(req.params.id)
+        .findByIdAndRemove(req.params._id)
         .exec (
             function(err, response) {
                 if (err) {
