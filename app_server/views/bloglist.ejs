@@ -26,8 +26,8 @@
                       </div>
                    <div class="card-footer">
                       <p class="card-text"><%= blog.createdOnDate %></p>
-		       <a href="/blogedit" class="btn btn-primary">Edit Blog</a>
-                       <a href="/blogdelete" class="btn btn-danger">Delete Blog</a>
+		       <a href="/blogedit/<%= blog.blogId %>" class="btn btn-primary">Edit Blog</a>
+                       <a href="/blogdelete/<%= blog.blogId %>" class="btn btn-danger">Delete Blog</a>
                    </div>
                    
            </div> <% }); %>				    

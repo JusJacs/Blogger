@@ -11,11 +11,11 @@ router.get('/bloglist', blogctrl.blogList); // bloglist page GET
 router.get('/blogadd',blogctrl.blogAdd);   // add blog page GET
 router.post('/blogadd', blogctrl.postBlogAdd); //add blog page POST
 
-router.get('/blogedit', blogctrl.blogEdit); // edit blog page GET
-router.put('/blogedit', blogctrl.blogEditPut); //  edit blog page PUT
+router.get('/blogedit/:blogId', blogctrl.blogEdit); // edit blog page GET
+router.post('/blogedit/:blogId', blogctrl.blogEditPut); //  edit blog page PUT
 
-router.get('/blogdelete', blogctrl.blogDelete); // delete blog page GET
-router.delete('/blogdelete', blogctrl.blogDeleteDelete); //delete delete page DELETE
+router.get('/blogdelete/:blogId', blogctrl.blogDelete); // delete blog page GET
+router.post('/blogdelete/:blogId', blogctrl.blogDeleteDelete); //delete delete page DELETE
 
 
 module.exports = router;

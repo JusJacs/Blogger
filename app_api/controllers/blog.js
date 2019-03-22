@@ -43,15 +43,15 @@ var buildBlogList = function(req, res, results) {
 
 // GET a blog by id
 module.exports.getOneBlog = function (req, res) {
-  console.log('Getting blog details', req.params._id);
+  console.log('Getting blog details', req.params);
 
-  if (req.params && req.params._id) {
+  if (req.params && req.params.blogId) {
     blog
-      .findById(req.params._id)
+      .findById(req.params.blogId)
       .exec(function(err, blog) {
         if (!blog) {
           sendJSONresponse(res, 404, 
-           { "message": "blog not found" });
+           { "message": "blogId not found" });
           return;
 
         } else if (err) {
@@ -63,9 +63,9 @@ module.exports.getOneBlog = function (req, res) {
         sendJSONresponse(res, 200, blog);
       });
   } else {
-    console.log('No blogid in request');
+    console.log('No blogId in request');
     sendJSONresponse(res, 404,
-     { "message": "No blogid in request" });
+     { "message": "No blogId in request" });
   }
 };
 
@@ -96,13 +96,13 @@ module.exports.postBlog = function (req, res) {
 
 //PUT method to update the blog
 module.exports.updateBlog = function (req, res) {
-    console.log("Updating a blog entry with id of " + req.params._id);
+    console.log("Updating a blog entry with id of " + req.params.blogId);
     console.log(req.body);
     blog
   	  .findOneAndUpdate(
-	     { _id: req.params._id },
- 	     { $set: {"blogTitle": req.body.blogTitle}},
-	     { $set: {"bookText": req.body.blogText}},
+	     { _id: req.params.blogId },
+	     { $set: {"blogTitle" : req.body.blogTitle ,"blogText" : req.body.blogText }},
+
 	     function(err, response) {
 	         if (err) {
 	  	         sendJSONresponse(res, 400, err);
@@ -116,10 +116,10 @@ module.exports.updateBlog = function (req, res) {
 
 //DELETE a blog
 module.exports.deleteBlog = function (req, res) {
-    console.log("Deleting blog entry with id of " + req.params._id);
+    console.log("Deleting blog entry with id of " + req.params.blogId);
     console.log(req.body);
     blog
-        .findByIdAndRemove(req.params._id)
+        .findByIdAndRemove(req.params.blogId)
         .exec (
             function(err, response) {
                 if (err) {

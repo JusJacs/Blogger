@@ -7,22 +7,22 @@
   <body>
     <div class="container">
         <% include nav %>
-        <div class="card" style="width: 50%">
-        <form method="post" action="/blogadd "padding: 20px">
+	<h1><%= title %></h1>
+        <div class="card" style="width: 50%; border-width: 3px;">
+        <form method="post" action="/blogedit/<%= blogData._id %>" style="padding: 20px;">
             <div class="form-group">
                 <label for="blogTitle" class="text-primary">Blog Title</label>
-                <input class="form-control" id="blogTitle" name="blogTitle"></input>
+                <input class="form-control" id="blogTitle" name="blogTitle" value="<%= blogData.blogTitle %>">
 
                 <label for="blogText" class="text-primary">Blog Text</label>
-                <input class="form-control" id="blogText" rows="3" name="blogText"></input>
+                <textarea class="form-control" id="blogText" rows="3" name="blogText"><%= blogData.blogText %></textarea>
 
             </div>
                 <input type="submit" class="btn btn-success" value="Save Blog">
+		<a href="/bloglist" class="btn btn-danger" role="button">Cancel</a>
         </form>
         </div>
     </div> <!-- container -->
   </body>
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
 </html>
 

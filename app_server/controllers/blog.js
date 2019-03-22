@@ -125,9 +125,6 @@ module.exports.blogEdit = function(req, res) {
 var renderBlogEditPage = function(req, res, blogData){
     res.render('blogedit', {
         title: 'Edit Blog',
-        pageHeader: {
-                title: 'Edit Blog'
-        },
         blogData: blogData,
 	blogTitle: blogData.blogTitle,
 	blogText: blogData.blogText,
@@ -140,8 +137,7 @@ var renderBlogEditPage = function(req, res, blogData){
 //blogEdit PUT
 module.exports.blogEditPut = function(req, res){
     var requestOptions, path, postdata;
-    var id = req.params.blogId;
-    path = '/api/blog/' + id;
+    path = "/api/blog/" + req.params.blogId;
 
     postdata = {
         blogTitle: req.body.blogTitle,
@@ -153,11 +149,11 @@ module.exports.blogEditPut = function(req, res){
         method : "PUT",
         json : postdata
     };
-
+    
     request(
 	requestOptions,
         function(err, response, body) {
-            if (response.statusCode === 201) {
+            if (!err &&  response.statusCode === 201) {
                 res.redirect('/bloglist');
             } else {
                 _showError(req, res, response.statusCode);
@@ -172,8 +168,8 @@ module.exports.blogEditPut = function(req, res){
 /* blogdelete GET */
 module.exports.blogDelete = function(req, res) {
    var requestOptions, path;
-    path = "/api/blog/" + req.params.blogId;
-    requestOptions = {
+   path = "/api/blog/" + req.params.blogId;
+    requestOptions = {       
         url : apiOptions.server + path,
         method : "GET",
         json : {}
@@ -195,14 +191,13 @@ module.exports.blogDelete = function(req, res) {
 };
 
 /* Render the blog delete page */
-var renderBlogDelete = function(req, res, responseBody){
+var renderBlogDelete = function(req, res, blogData){
         res.render('blogdelete', {
-        title: 'BLog Delete',
-        pageHeader: {
-            title: 'Blog Delete'
-	},       
-	 blogData: responseBody,
+        title: 'Blog Delete',
+	 blogData: blogData,
 	 blogId: blogData._id,
+	 blogTitle: blogData.blogTitle,
+	 blogText: blogData.blogText
     });
 };
 

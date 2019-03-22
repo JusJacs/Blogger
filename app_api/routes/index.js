@@ -6,10 +6,10 @@ var blogCtrl = require('../controllers/blog');
 
 //API route methods
 router.get('/blog', blogCtrl.getBlogList); //Return blog list
-router.get('/blog/:blogid', blogCtrl.getOneBlog); // RETURN SINGLE BLOG
+router.get('/blog/:blogId', blogCtrl.getOneBlog); // RETURN SINGLE BLOG
 router.post('/blog', blogCtrl.postBlog); //ADD a BLOG POST method
-router.put('/blog/:blogid', blogCtrl.updateBlog); // UPDATE a blog
-router.delete('/blog/:blogid', blogCtrl.deleteBlog); // DELETE a blog
+router.put('/blog/:blogId', blogCtrl.updateBlog); // UPDATE a blog
+router.delete('/blog/:blogId', blogCtrl.deleteBlog); // DELETE a blog
 
 
 

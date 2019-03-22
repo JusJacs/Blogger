@@ -7,6 +7,7 @@
   <body>
     <div class="container">
         <% include nav %>
+	<h1><%= title %></h1>
         <div class="card" style="width: 50%">
         <form method="post" action="/blogadd "padding: 20px">
             <div class="form-group">
@@ -14,7 +15,7 @@
                 <input class="form-control" id="blogTitle" name="blogTitle"></input>
 
                 <label for="blogText" class="text-primary">Blog Text</label>
-                <input class="form-control" id="blogText" rows="3" name="blogText"></input>
+                <textarea class="form-control" id="blogText" rows="3" name="blogText"></textarea>
 
             </div>
                 <input type="submit" class="btn btn-primary" value="Add Blog">
@@ -22,8 +23,6 @@
         </div>
     </div> <!-- container -->
   </body>
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
 </html>
 
 

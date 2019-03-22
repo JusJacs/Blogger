@@ -3,6 +3,7 @@
  <head>
   <title><%= title %></title>
   <link rel='stylesheet' href='stylesheets/style.css' />
+  <link rel='stylesheet' href='/css/bootstrap.min.css'/>
 
  </head>
 
@@ -13,18 +14,18 @@
      <div class="container">
         <p></p>
         <div class="card border-primary" style="width: 50%">
-        <form method="post" action="/blogdelete" style="padding: 20px">
+        <form method="post" action="/blogdelete/<%= blogData._id %>" style="padding: 20px">
             <div class="form-group">
                 <label for="summary" class="text-primary">Blog Title</label>
-                <input class="form-control" id="title" name="blogTitle">
+                <input class="form-control" id="blogTitle" name="blogTitle" value="<%= blogTitle %>" readonly>
 
-                <label for="detail" class="text-primary">Blog Text</label>
-                <textarea class="form-control" id="text" rows="3" name="blogText"></textarea>
+                <label for="blogText" class="text-primary">Blog Text</label>
+                <textarea class="form-control" id="blogText" rows="5" name="blogText" readonly><%= blogText %></textarea>
 
                 <br/>
                 <br/>
-                <input type="submit" class="btn btn-primary" value="Delete Blog">
-                <a href="/bloglist" class="btn btn-danger">Cancel</a>
+                <a href="/bloglist" class="btn btn-primary" role="button">Cancel</a>
+		<input type="submit" class="btn btn-danger" value="Delete Blog">
             </div>
 
         </form>
@@ -32,8 +33,6 @@
     </div> <!-- container -->
    </body>
 
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
 
 </html>
 
