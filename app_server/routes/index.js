@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var homectrl = require('../controllers/home');
 var blogctrl = require('../controllers/blog');
-//var
+
 
 /* Page Routes */
 router.get('/', homectrl.home); //home page GET
