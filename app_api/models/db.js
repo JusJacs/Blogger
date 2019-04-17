@@ -46,5 +46,8 @@ process.on('SIGTERM', function() {
     process.exit(0);
 }); });    
 
+//Bring in models & schemas
 require('./blogs');
+require('./users');
+
 
