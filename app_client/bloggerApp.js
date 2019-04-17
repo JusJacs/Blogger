@@ -1,5 +1,70 @@
 var app = angular.module('bloggerApp', ['ngRoute']);  //need to add 'ngRoute' inside brackets
 
+//*** Authentication Service and Methods **
+app.service('authentication', authentication);
+authentication.$inject = ['$window', '$http'];
+function authentication ($window, $http) {
+
+    var saveToken = function (token) {
+        $window.localStorage['blog-token'] = token;
+    };
+
+    var getToken = function () {
+        return $window.localStorage['blog-token'];
+    };
+
+    var register = function(user) {
+        console.log('Registering user ' + user.email + ' ' + user.password);
+        return $http.post('/api/register', user).success(function(data){
+            saveToken(data.token);
+        });
+    };
+
+    var login = function(user) {
+        console.log('Attempting to login user ' + user.email + ' ' + user.password);
+        return $http.post('/api/login', user).success(function(data) {
+            saveToken(data.token);
+        });
+    };
+
+    var logout = function() {
+        $window.localStorage.removeItem('blog-token');
+    };
+
+    var isLoggedIn = function() {
+        var token = getToken();
+
+        if(token){
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+            return payload.exp > Date.now() / 1000;
+        } else {
+            return false;
+        }
+    };
+
+    var currentUser = function() {
+        if(isLoggedIn()){
+            var token = getToken();
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+            return {
+                email : payload.email,
+                name : payload.name
+            };
+        }
+    };
+
+    return {
+        saveToken : saveToken,
+        getToken : getToken,
+        register : register,
+        login : login,
+        logout : logout,
+        isLoggedIn : isLoggedIn,
+        currentUser : currentUser
+    };
+}
+
 
 //*** Router Provider ***
 app.config(function($routeProvider) {
@@ -31,6 +96,18 @@ app.config(function($routeProvider) {
         .when('/blogdelete/:blogId', {
             templateUrl: 'pages/blogdelete.html',
             controller: 'deleteController',
+            controllerAs: 'vm'
+        })
+
+        .when('/login', {
+            templateUrl: 'pages/login.html',
+            controller: 'LoginController',
+            controllerAs: 'vm'
+        })
+
+        .when('/register', {
+            templateUrl: 'pages/register.html',
+            controller: 'RegisterController',
             controllerAs: 'vm'
         })
 
@@ -66,19 +143,23 @@ app.controller('blogListController', function blogListController($http) {
 });
 
 //BLOGADD CONTROLLER
-app.controller('addController', [ '$http', '$location', function addController($http, $location) {
+app.controller('addController', [ '$http', '$location', 'authentication', function addController($http, $location, authentication) {
     var vm = this;
     vm.blog = {};
     vm.pageHeader = {
         title: 'Add Blog'
     };
 
+    vm.isLoggedIn = function() {
+        return authentication.isLoggedIn();
+    }
+
     vm.onSubmit = function() {
         var blogData = vm.blog;
         blogData.blogTitle = userForm.blogTitle.value;
         blogData.blogText = userForm.blogText.value;
 
-        addBlog($http, blogData)
+        addBlog($http, blogData, authentication)
             .success(function(blogData) {
                 console.log(blogData);
                 $location.path('/bloglist').replace();
@@ -90,13 +171,17 @@ app.controller('addController', [ '$http', '$location', function addController($
 }]);
 
 //EDIT BLOG CONTROLLER
-app.controller('editController', [ '$http', '$routeParams', '$location', function editController($http, $routeParams, $location) {
+app.controller('editController', [ '$http', '$routeParams', '$location', 'authentication', function editController($http, $routeParams, $location, authentication) {
     var vm = this;
     vm.pageHeader = {
         title: 'Edit a Blog'
     };
     vm.blog = {};
     vm.id = $routeParams.blogId;
+
+    vm.isLoggedIn = function() {
+        return authentication.isLoggedIn();
+    }
 
     getBlogById($http, vm.id)
         .success(function(blogData) {
@@ -111,7 +196,7 @@ app.controller('editController', [ '$http', '$routeParams', '$location', functio
         blogData.blogTitle = userForm.blogTitle.value;
         blogData.blogText = userForm.blogText.value;
 
-        editBlog($http, blogData, vm.id)
+        editBlog($http, blogData, vm.id, authentication)
             .success(function(blogData) {
                 vm.message = "Blog has been edited";
                 $location.path('/bloglist').replace();
@@ -123,13 +208,17 @@ app.controller('editController', [ '$http', '$routeParams', '$location', functio
 }]);
 
 //DELETE BLOG CONTROLLER
-app.controller('deleteController', [ '$http', '$routeParams', '$location', function deleteController($http, $routeParams, $location) {
+app.controller('deleteController', [ '$http', '$routeParams', '$location', 'authentication', function deleteController($http, $routeParams, $location, authentication) {
     var vm = this;
     vm.pageHeader = {
         title: 'Delete Blog'
     };
     vm.blog = {};
     vm.id = $routeParams.blogId;
+
+    vm.isLoggedIn = function() {
+        return authentication.isLoggedIn();
+    }
 
     getBlogById($http, vm.id)
         .success(function(blogData) {
@@ -143,7 +232,7 @@ app.controller('deleteController', [ '$http', '$routeParams', '$location', funct
     vm.onSubmit = function() {
         var blogData = vm.blog;
 
-        deleteBlog($http, vm.id)
+        deleteBlog($http, vm.id, authentication)
             .success(function(blogData) {
                 vm.message = "Blog deleted";
                 $location.path('/bloglist').replace();
@@ -160,8 +249,8 @@ function getBlogList($http) {
     return $http.get('/api/blog');
 }
 
-function addBlog($http, blogData) {
-    return $http.post('/api/blog/' , blogData);
+function addBlog($http, blogData, authentication) {
+    return $http.post('/api/blog', blogData, { headers: { Authorization: 'Bearer '+ authentication.getToken() }});
 }
 
 function getBlogById($http, blogId) {
@@ -169,15 +258,17 @@ function getBlogById($http, blogId) {
 }
 
 
-function editBlog($http, blogData, blogId) {
-    return $http.put('/api/blog/' + blogId, blogData);
+function editBlog($http, blogData, blogId, authentication) {
+    return $http.put('/api/blog/' + blogId, blogData, { headers: { Authorization: 'Bearer '+ authentication.getToken() }} );
 }
 
-function deleteBlog($http, blogId) {
-    return $http.delete('/api/blog/' + blogId);
+function deleteBlog($http, blogId, authentication) {
+    return $http.delete('/api/blog/' + blogId, { headers: { Authorization: 'Bearer '+ authentication.getToken() }});
 }
 
 
 
-
+// function updateBlogById($http, authentication, id, data) {
+//     return $http.put('/api/blogs/' + id, data, { headers: { Authorization: 'Bearer '+ authentication.getToken() }} );
+// }
 

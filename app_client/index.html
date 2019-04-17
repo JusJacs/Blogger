@@ -1,7 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html ng-app="bloggerApp">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="/lib/angular-route.min.js"></script>
     <script src="/lib/angular-ui-router.min.js"></script>
@@ -10,19 +12,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="/bloggerApp.js"></script>
+    <script src="/common/auth.js"></script>
+    <script src="/common/navigation.js"></script>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-primary">
-    <a class="navbar-brand" href="#/"<span style="color: white">My Blog</span></a>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#/bloglist"<span style="color: white">Blog List</span></a>
-            <a class="nav-item nav-link active" href="#/blogadd"<span style="color: white">Add a Blog</span></a>
-        </div>
-    </div>
-</nav>
+
+<!-- Navigation Directive -->
+<div ng-controller="NavigationController">
+    <navigation></navigation>
+</div>
 
 <!-- Angular Templates -->
 
@@ -118,8 +117,69 @@
 </script>
 <!-- end blog delete -->
 
+<!-- register -->
+<script type="text/ng-template" id="pages/register.html">
+    <h2> {{ vm.pageHeader.title}}</h2>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <p>Already a member? Please <a href="/#login?page={{ vm.returnPage }}">log in</a> instead.</p>
+            <form ng-submit="vm.onSubmit()" ng-controller="RegisterController">
+                <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
+                <div class="form-group">
+                    <label for="name">Full name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="vm.credentials.name">
+                </div>
+                <div class="form-group">
+                    <label for="email1">Email address</label>
+                    <input type="email" class="form-control" id="email1" placeholder="Enter email" ng-model="vm.credentials.email">
+                </div>
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input type="password" class="form-control" id="password1" placeholder="Password" ng-model="vm.credentials.password">
+                </div>
+                <button type="submit" style="background-color: #007BFF" class="btn btn-default">Register!</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+</script>
+<!-- end register -->
+
+<!-- login -->
+<script type="text/ng-template" id="pages/login.html">
+
+    <div class="container">
+        <h2> {{ vm.pageHeader.title }}</h2>
+        <div class="row">
+            <div class="col-md-6 col-sm-8">
+                <p>Not a member? Please <a href="/#register?page={{ vm.returnPage }}">register</a> first.</p>
+                <form ng-submit="vm.onSubmit()" ng-controller="LoginController">
+                    <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
+                    <div class="form-group">
+                        <label for="email2">Email address</label>
+                        <input type="email" class="form-control" id="email2" placeholder="Enter email" ng-model="vm.credentials.email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Password</label>
+                        <input type="password" class="form-control" id="password2" placeholder="Password" ng-model="vm.credentials.password">
+                    </div>
+                    <button type="submit" style="background-color: #007BFF" class="btn btn-default">Sign in!</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</script>
+<!-- end login -->
+
 <!-- Angular View (dynamic content goes here) -->
 <div ng-view></div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 </body>
