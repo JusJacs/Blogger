@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 var blog = mongoose.model('myBlog');
                                                         
 var sendJSONresponse = function(res, status, content) {
@@ -30,10 +31,15 @@ module.exports.getBlogList = function (req, res) {
 var buildBlogList = function(req, res, results) {
   var blogs = [];
   results.forEach(function(obj) {
+
+    var date = moment(obj.createdOnDate).format('MM-DD-YYYY LT');
+
     blogs.push({
       blogTitle: obj.blogTitle,
       blogText: obj.blogText,
-      createdOnDate: obj.createdOnDate,
+      userName: obj.userName,
+      userEmail: obj.userEmail,
+      createdOnDate: date,
       blogId: obj._id
     });
   });
@@ -79,7 +85,9 @@ module.exports.postBlog = function (req, res) {
     .create({
       blogTitle: req.body.blogTitle,
       blogText: req.body.blogText,
-      createdOnDate: req.body.date
+      createdOnDate: req.body.date,
+      userName: req.body.userName,
+      userEmail: req.body.userEmail
       },      
       function(err, blog) {
        if (err) {
@@ -121,7 +129,7 @@ module.exports.deleteBlog = function (req, res) {
     blog
         .findByIdAndRemove(req.params.blogId)
         .exec (
-            function(err, response) {
+            function(err) {
                 if (err) {
                             sendJSONresponse(res, 404, err);
                 } else {

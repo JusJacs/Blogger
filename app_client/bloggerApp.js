@@ -1,4 +1,4 @@
-var app = angular.module('bloggerApp', ['ngRoute']);  //need to add 'ngRoute' inside brackets
+var app = angular.module('bloggerApp', ['ngRoute']);
 
 //*** Authentication Service and Methods **
 app.service('authentication', authentication);
@@ -126,21 +126,31 @@ app.controller('homeController', function homeController() {
 
 
 //BLOGLIST CONTROLLER
-app.controller('blogListController', function blogListController($http) {
+app.controller('blogListController',['$http', 'authentication', function blogListController($http, authentication) {
     var vm = this;
     vm.pageHeader = {
         title: 'Blog List'
     };
 
+    vm.isLoggedIn = function (){
+        return authentication.isLoggedIn();
+    }
+
+    if(authentication.isLoggedIn()){
+        vm.userEmail = authentication.currentUser().email;
+    }
+
+
     getBlogList($http)
         .success(function(data) {
             vm.blogList = data;
             vm.message = "Blogs found!";
+            vm.userEmail = authentication.currentUser().email
         })
         .error(function (e) {
             vm.message = "Could not find blog list";
         });
-});
+}]);
 
 //BLOGADD CONTROLLER
 app.controller('addController', [ '$http', '$location', 'authentication', function addController($http, $location, authentication) {
@@ -158,6 +168,8 @@ app.controller('addController', [ '$http', '$location', 'authentication', functi
         var blogData = vm.blog;
         blogData.blogTitle = userForm.blogTitle.value;
         blogData.blogText = userForm.blogText.value;
+        blogData.userName = authentication.currentUser().name;
+        blogData.userEmail = authentication.currentUser().email;
 
         addBlog($http, blogData, authentication)
             .success(function(blogData) {
@@ -266,9 +278,4 @@ function deleteBlog($http, blogId, authentication) {
     return $http.delete('/api/blog/' + blogId, { headers: { Authorization: 'Bearer '+ authentication.getToken() }});
 }
 
-
-
-// function updateBlogById($http, authentication, id, data) {
-//     return $http.put('/api/blogs/' + id, data, { headers: { Authorization: 'Bearer '+ authentication.getToken() }} );
-// }
 

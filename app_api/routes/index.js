@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
-var auth = jwt({   // Lab 6
+var auth = jwt({   // Lab 7
     secret: process.env.JWT_SECRET,
     userProperty: 'payload'
 });
 var blogCtrl = require('../controllers/blog');
-var authCtrl = require('../controllers/authentication');  // Lab 6
+var authCtrl = require('../controllers/authentication');  // Lab 7
 
 
 

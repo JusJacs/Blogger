@@ -46,12 +46,13 @@
             </div>
             <div class="card-footer">
                 <div class = "col-sm">
+                    Published by: {{blog.userName}} on {{blog.createdOnDate}}
                     <ul class="nav justify-content-end nav-pills card-header-pills">
                         <li class="nav-item">
-                            <a class="btn btn-primary" href="#/blogedit/{{blog.blogId}}" role="button">Edit Blog</a>
+                            <a ng-show="vm.isLoggedIn() && blog.userEmail == vm.userEmail" class="btn btn-primary" href="#/blogedit/{{blog.blogId}}" role="button">Edit Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-danger" href="#/blogdelete/{{blog.blogId}}" role="button">Delete Blog</a>
+                            <a ng-show="vm.isLoggedIn() && blog.userEmail == vm.userEmail" class="btn btn-danger" href="#/blogdelete/{{blog.blogId}}" role="button">Delete Blog</a>
                         </li>
                     </ul>
                 </div>
